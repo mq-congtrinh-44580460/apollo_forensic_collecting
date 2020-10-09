@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'login.dart';
+import 'package:apollo_forensic_collecting/main.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -12,15 +14,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: MyLoginPage(),
     );
   }
 }
-class MyHomePage extends StatefulWidget {
+class MyLoginPage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyLoginPageState createState() => _MyLoginPageState();
 }
-class _MyHomePageState extends State<MyHomePage> {
+class _MyLoginPageState extends State<MyLoginPage> {
   final _auth = FirebaseAuth.instance;
   bool showProgress = false;
   String email, password;
@@ -37,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Registration Page",
+                "Login Page",
                 style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20.0),
               ),
               SizedBox(
@@ -47,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
-                  email = value; //get the value entered by user.
+                  email = value; // get value from TextField
                 },
                 decoration: InputDecoration(
                     hintText: "Enter your Email",
@@ -61,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 obscureText: true,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
-                  password = value; //get the value entered by user.
+                  password = value; //get value from textField
                 },
                 decoration: InputDecoration(
                     hintText: "Enter your Password",
@@ -81,15 +83,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       showProgress = true;
                     });
                     try {
-                      final newuser =
-                      await _auth.createUserWithEmailAndPassword(
+                      final newUser = await _auth.signInWithEmailAndPassword(
                           email: email, password: password);
-                      if (newuser != null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyLoginPage()),
-                        );
+                      print(newUser.toString());
+                      if (newUser != null) {
+                        Fluttertoast.showToast(
+                            msg: "Login Successfull",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.blueAccent,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
                         setState(() {
                           showProgress = false;
                         });
@@ -99,26 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   minWidth: 200.0,
                   height: 45.0,
                   child: Text(
-                    "Register",
+                    "Login",
                     style:
                     TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyLoginPage()),
-                  );
-                },
-                child: Text(
-                  "Already Registred? Login Now",
-                  style: TextStyle(
-                      color: Colors.blue, fontWeight: FontWeight.w900),
                 ),
               )
             ],

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "712614102693",
+    "firebase_url": "https://apollo-forensic-collecting.firebaseio.com",
+    "project_id": "apollo-forensic-collecting",
+    "storage_bucket": "apollo-forensic-collecting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712614102693:android:3b7a5fae24b3ccf3006f4c",
+        "android_client_info": {
+          "package_name": "com.apollo.apollo_forensic_collecting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712614102693-fg1r2gh42b13mdar3e70t7rskqcp4eiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoZoZDG8b8EaB4_i9WTGkTcRiecFYAPPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712614102693-fg1r2gh42b13mdar3e70t7rskqcp4eiu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
